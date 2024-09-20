@@ -1,0 +1,8 @@
+export enum StatusPrefix {
+  SALES_ORDER = 'SO',
+  DELIVERY_PLAN = 'DP',
+  DELIVERY_ORDER = 'DO',
+  INVENTORY_TRANSFER_REQUEST = 'ITR',
+  WORK_ORDER = 'WO',
+  PURCHASE_ORDER = 'PO'
+}

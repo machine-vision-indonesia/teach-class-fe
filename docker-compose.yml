@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  mvdp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: mvdp
+    volumes:
+      - ./public/__ENV.js:/app/public/__ENV.js
+    ports:
+      - 3000:3000
+    restart: unless-stopped

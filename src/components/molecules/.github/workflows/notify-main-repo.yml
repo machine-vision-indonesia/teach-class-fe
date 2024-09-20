@@ -1,0 +1,18 @@
+name: Notify Main Repository
+
+on:
+  push:
+    tags:
+      - 'storybook-v2.*'
+
+jobs:
+  notify_main_repo:
+    runs-on: self-hosted
+    steps:
+      - name: Send repository dispatch to main repo
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.ACTION_WEBHOOK_WORKFLOW_TOKEN }}" \
+            https://api.github.com/repos/machine-vision-indonesia/mvdp-core/dispatches \
+            -d '{"event_type":"storybook-staging-release-tag","client_payload":{"ref":"${{ github.ref }}","repository":"${{ github.repository }}"}}'

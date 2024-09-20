@@ -1,0 +1,93 @@
+name: Release Storybook Development
+
+on:
+  push:
+    tags:
+      - release-2.0.0-beta.*
+
+env:
+  PROJECT_NAME: Storybook
+  PROJECT_ENV: Development
+
+jobs:
+  checkout:
+    name: Checkout Repository and Submodules
+    runs-on: self-hosted
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          submodules: 'recursive'
+          fetch-depth: 0
+          fetch-tags: true
+
+  build_and_push_to_docker:
+    name: Build Docker Image
+    runs-on: self-hosted
+    needs: checkout
+    steps:
+      - name: Generate .env file
+        run: |
+          cat .env.example | sed 's/^#//' > .env
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.storybook
+          push: true
+          tags: mvdevops/storybook:dev-1.0.0
+
+  deploy_to_remote_server:
+    name: Pull and Docker Up
+    runs-on: self-hosted
+    needs: build_and_push_to_docker
+    steps:
+      - name: Connect to Remote Server and Run Commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.STORYBOOK_STAGING_HOST }}
+          username: ${{ secrets.STORYBOOK_STAGING_USER }}
+          password: ${{ secrets.STORYBOOK_STAGING_PASSWORD }}
+          port: ${{ secrets.STORYBOOK_STAGING_PORT }}
+          sync: true
+          script_stop: true
+          script: |
+            cd mv-setup
+            ./docker-compose.sh pull storybook-dev && ./docker-compose.sh up -d storybook-dev
+
+  notify:
+    runs-on: self-hosted
+    needs: [ checkout, build_and_push_to_docker, deploy_to_remote_server ]
+    if: always()
+    steps:
+      - name: Determine final job status
+        id: determine_status
+        run: |
+          if [[ "${{ needs.checkout.result }}" == "failure" || "${{ needs.build_and_push_to_docker.result }}" == "failure" || "${{ needs.deploy_to_remote_server.result }}" == "failure" ]]; then
+            echo "final_status=failure" >> $GITHUB_OUTPUT
+          else
+            echo "final_status=success" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send status message to Microsoft Teams
+        uses: neonidian/teams-notify-build-status@v4.1.0
+        with:
+          webhookUrl: ${{ secrets.MSTEAMS_WEBHOOK }}
+          status: ${{ steps.determine_status.outputs.final_status }}
+          title: >-
+            Deployment information of ${{ env.PROJECT_NAME }} - ${{ env.PROJECT_ENV }}
+          titleBackgroundColor: ${{ steps.determine_status.outputs.final_status }}
+          message: >-
+            The deployment of the ${{ env.PROJECT_NAME }} - ${{ env.PROJECT_ENV }} triggered by ${{ github.actor }} has resulted in a ${{ steps.determine_status.outputs.final_status }} status.
+        env:
+          SHOULD_DISPLAY_ACTOR_LABEL: true
+          SHOULD_DISPLAY_VIEW_RUN_BUTTON: true
+          SHOULD_DISPLAY_VIEW_COMMIT_BUTTON: true

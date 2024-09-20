@@ -1,0 +1,21 @@
+{
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.rebaseWhenSync": true,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "prettier.requireConfig": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never",
+    "quickfix.biome": "explicit"
+  },
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
+  "eslint.format.enable": true,
+  "npm.packageManager": "yarn",
+  "cSpell.words": ["Customizer"],
+  "search-node-modules.path": "node_modules",
+  "markdown.extension.toc.updateOnSave": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

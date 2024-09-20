@@ -1,0 +1,1 @@
+# mvdp-core-pages

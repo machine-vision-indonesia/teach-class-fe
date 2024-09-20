@@ -1,0 +1,4 @@
+node_modules/
+.next
+@fake-db/
+@example/

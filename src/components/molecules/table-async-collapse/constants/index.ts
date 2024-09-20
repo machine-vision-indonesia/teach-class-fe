@@ -1,0 +1,1 @@
+export const PRIMARY_QUERY_KEY_USERS = 'USERS'
