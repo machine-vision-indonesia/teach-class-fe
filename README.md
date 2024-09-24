@@ -1,13 +1,8 @@
-# MVDP
+# TECH CLASS MVDP
 
 ![MVDP Logo](https://static.wixstatic.com/media/eb21c1_0189d0cb1beb4ff0b9597d59abdebfac~mv2.png/v1/fill/w_201,h_58,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Machine%20Vision.png)
 
-**MVDP (Machine Vision Digitalization Platform)** adalah source code frontend yang digunakan untuk semua proyek. Penting untuk dipahami bahwa source code ini adalah repositori utama dan termasuk beberapa git submodule. Scope pekerjaan utama pada suatu proyek adalah pada git submodule:
-
-- `machine-vision-indonesia/mvdp-solution-{solutiongroup}` (`src/modules/{solutiongroup}`).
-- `machine-vision-indonesia/mvdp-components` (`src/components`).
-
-Daftar submodule yang tersedia pada MVDP terdapat dalam file `.gitmodules`. Semua file dan folder yang tidak termasuk dalam submodule merupakan bagian dari MVDP.
+**MVDP (Machine Vision Digitalization Platform)** adalah source code frontend yang digunakan untuk tech-class Machine Vision Indonesia.
 
 ### 🏛 ️Struktur Folder `/src`
 
@@ -19,9 +14,10 @@ src
 ├── atoms.ts
 ├── client
 ├── components (nanti akan menjadi satu kesatuan untuk submodule master component)
-│   ├── atoms (submodule machine-vision-indonesia/mvdp-component-atom)
-│   ├── complexes (submodule machine-vision-indonesia/mvdp-component-complex)
-│   └── molecules (submodule machine-vision-indonesia/mvdp-component-molecule) 
+│   ├── atoms
+│   ├── molecules
+│   ├── organisms
+│   └── templates 
 ├── configs
 ├── constant
 ├── context
@@ -32,7 +28,7 @@ src
 │   ├── routes.tsx // routes utama di level src/modules
 │   ├── error
 │   ├── example
-│   └── solutiongroup (submodule machine-vision-indonesia/mvdp-solution-{solutiongroup})
+│   └── solutiongroup (nama foldernya DMS)
 │       ├── clusters
 │       │   └── cluster-name
 │       │       └── pages
@@ -78,18 +74,18 @@ Sebelum memulai, pastikan Anda memiliki alat-alat berikut:
 
 ### 🖲️ Teknologi yang digunakan
 
-- **Framework**: Next.js v14.2.5 (https://nextjs.org/docs)
-- **Programming Language**: TypeScript v5.5.4 (https://www.typescriptlang.org)
-- **Router**: React Router v6.26.1 (https://reactrouter.com/en/6.26.1)
-- **JavaScript Runtime**: Node.js LTS (https://nodejs.org/en)
-- **UI Library**: Material UI v5.16.7 (https://mui.com/material-ui/getting-started)
-- **Form Library**: React Hook Form (https://react-hook-form.com)
-- **Form Validator**: Zod (https://zod.dev)
-- **Client State Management**: Jotai v2 (https://jotai.org)
-- **Server State Management**: TanStack Query v5 (https://tanstack.com/query/latest)
-- **Date Utility**: date-fns (https://date-fns.org)
-- **Components Documentation**: Storybook v8.2 (https://storybook.js.org)
-- **Formatter & Linter**: Biome (https://biomejs.dev)
+- **Framework**: Next.js v14.2.5 (<https://nextjs.org/docs>)
+- **Programming Language**: TypeScript v5.5.4 (<https://www.typescriptlang.org>)
+- **Router**: React Router v6.26.1 (<https://reactrouter.com/en/6.26.1>)
+- **JavaScript Runtime**: Node.js LTS (<https://nodejs.org/en>)
+- **UI Library**: Material UI v5.16.7 (<https://mui.com/material-ui/getting-started>)
+- **Form Library**: React Hook Form (<https://react-hook-form.com>)
+- **Form Validator**: Yup (<https://github.com/jquense/yup?tab=readme-ov-file>)
+- **Client State Management**: Jotai v2 (<https://jotai.org>)
+- **Server State Management**: TanStack Query v5 (<https://tanstack.com/query/latest>)
+- **Date Utility**: date-fns (<https://date-fns.org>)
+- **Components Documentation**: Storybook v8.2 (<https://storybook.js.org>)
+- **Formatter & Linter**: Biome (<https://biomejs.dev>)
 
 ## 🏃🏻 Menjalankan MVDP
 
@@ -97,32 +93,38 @@ Untuk menjalankan MVDP, ikuti langkah-langkah berikut:
 
 1. **Clone Repository**
    <br> Clone repository dengan perintah berikut:
+   - clone https
+
    ```shell
-   git clone --recurse-submodules git@github.com:machine-vision-indonesia/mvdp-core.git
+   git clone https://github.com/machine-vision-indonesia/teach-class-fe.git
    ```
-   Apabila terdapat satu atau lebih submodule yang gagal saat proses cloning, jalankan perintah berikut sesuai submodule yang gagal untuk clone secara manual:
-    ```shell
-    # clone submodule components
-    rm -rf src/components && git submodule update --recursive --remote src/components
-   
-   # clone submodule components
-    rm -rf src/modules/{solutiongroup} && git submodule update --recursive --remote src/modules/{solutiongroup}
-    
-    # clone submodule core
-    rm -rf src/modules/core && git submodule update --recursive --remote src/modules/core
-    ```
+
+    - clone ssh
+
+   ```shell
+   git clone git@github.com:machine-vision-indonesia/teach-class-fe.git
+   ```
+
 2. **Install Dependencies**
    <br> Install semua dependency yang dibutuhkan dengan menjalankan:
+
+    > [!NOTE]
+    > wajib menggunakan npm dari pada yarn karenena ada bug pada yarn yang menyebabkan error pada running storrybook
+
     ```shell
     npm install
     ```
+
 3. **Setup Environment Variables**
    <br>Salin file `.env.example` ke `.env` dan isi berdasarkan instruksi dari Tech Lead:
+
     ```shell
     cp .env.example .env
     ```
+
 4. **Jalankan MVDP**
    <br>Jalankan aplikasi dengan perintah:
+
     ```shell
     npm run dev
     ```
@@ -152,6 +154,7 @@ Dalam Machine Vision, kita menerapkan Atomic Components dalam MVDP ini. Atomic c
 Pengembangan komponen master harus mematuhi aturan-aturan berikut untuk memastikan konsistensi dan kualitas:
 
 - **Dokumentasi Komponen**: Setiap komponen harus memiliki deskripsi `JSDoc` di atas deklarasinya, diambil dari overview MV UI Kit atau ditulis manual.
+
   ```tsx
   /**
    * Komponen Avatar berfungsi sebagai representasi visual dari seorang pengguna, memberikan identifikasi yang cepat dan mudah dikenali.
@@ -162,6 +165,7 @@ Pengembangan komponen master harus mematuhi aturan-aturan berikut untuk memastik
       // ...
     }
   ```
+
 - **Non-default Exports**: Semua komponen diekspor tanpa menggunakan `default` untuk kemudahan pelacakan.
   ![image](https://github.com/machine-vision-indonesia/mvdp-core/assets/22115051/b22df5d9-e464-480a-b03b-069b99b43f5f)
 - **Struktur Default Props**: Nilai default diatur di dalam parameter fungsi untuk keterbacaan lebih baik.
@@ -246,114 +250,28 @@ Git Flow ini dirancang untuk memastikan proses pengembangan yang terstruktur dan
 ##### Feature Development
 
 1. Buat feature branch dari `dev/{projectcode}`:
-    ```
+
+    ```bash
     git checkout dev/{projectcode}
     git checkout -b feature/{projectcode}-{task-name}
     ```
+
 2. Lakukan pengembangan fitur di branch tersebut.
 3. Buat Pull Request (PR) ke `dev/{projectcode}` setelah pengembangan selesai.
 4. Tech Lead melakukan review PR.
 5. Setelah approval, merge PR ke `dev/{projectcode}`:
-    ```
+
+    ```bash
     git checkout dev/{projectcode}
     git merge feature/{projectcode}-{task-name}
     ```
 
 ========================END========================
-<br><br>
-[Work In Progress]
-<br><br>
-check apakah sudah semua submodule sudah sync dengan cara:
-
-```shell
-git submodule sync
-```
-
-maka akan muncul sebagai berikut. jika tidak muncul semua silahkah hubungi techlead
-> Synchronizing submodule url for 'src/components/atoms' \
-> Synchronizing submodule url for 'src/components/complexes' \
-> Synchronizing submodule url for 'src/components/molecules' \
-> Synchronizing submodule url for 'src/pages/core' \
-> Synchronizing submodule url for 'src/pages/solutions'
-
-### Add Submodule
-
-- Pindah ke directory yang akan di isi dengan submodule
-
-```text
-cd path/of/your/dir
-```
-
-> dalam hal ini team project dapat menambahkan di: \
-> 'src/components/complexes' untuk per template \
-> atau 'src/pages' untuk per project \
-> sesuai dengan kegunaanya
-
-- Tambahkan repo dengan cara:
-
-```bash
-# add submodule
-git submodule add <repo_submodule> <nama_directory_optional>
-
-# example
-git submodule add git@github.com:machine-vision-indonesia/mvdp-component-atom.git atoms
-```
-
-> file `.gitmodules` akan otomatis tergenerate di main repository
-
-- contoh isi file
-
-```text
-[submodule "src/components/atoms"]
-	path = src/components/atoms
-	url = git@github.com:machine-vision-indonesia/mvdp-component-atom.git
-[submodule "src/components/molecules"]
-	path = src/components/molecules
-	url = git@github.com:machine-vision-indonesia/mvdp-component-molecule.git
-```
-
-### Fetch
-
-```bash
-# fetch all recursive
-git submodule update --recursive --remote
-```
-
-> terdapat share folder seperti service, store , type etc. \
-> di gunakan untuk share file yang di gunakan global untuk solusi tersebut \
-> sehingga tidak perlu merubah atau menambahkan di core repository
-
-> Important!!: setiap component wajib ada storybook nya
-
-#### Generate complex folder recursive (opsional)
-
-team product telah menyediakan template complex directories untuk di pergunakan team project. template dapat di generate dengan cara sebagai berikut:
-
-```bash
-# generate template complex
-npm run gen:complex -- -n <nama_folder_submodule>
-
-#example
-npm run gen:complex -- -n submodule-saya
-```
-
-> generate template hanya bisa di eksekusi setelah add git submodule kedalam folder complex \
-> opsi `-n` atau `--nama` untuk deklar nama folder (di sesuaikan dengan nama folder complex submodule nya)
-
-## deployment
-
-lihat `makefile` yang tersedia untuk dokumentasi penggunaan
-
-```bash
-# Usage		: make buildanddeploy mvdpbranch=branch_name projectbranch=branch_name corepagebranch=branch_name tag=tag
-# Example	: make buildanddeploy mvdpbranch=release/ajinomoto projectbranch=release/ajinomoto corepagebranch=release/ajinomoto tag=ajinomoto-release-latest
-make buildanddeploy mvdpbranch=release/ajinomoto projectbranch=release/ajinomoto corepagebranch=release/ajinomoto tag=ajinomoto-release-latest
-```
 
 ## Versioning
 
 - docker image
 
 ```text
-mvdevops/mvdp:core-4.0.0
+mvdevops/tech-class-mvdp:core-4.0.0
 ```
