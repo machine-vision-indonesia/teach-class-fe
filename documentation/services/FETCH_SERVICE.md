@@ -7,7 +7,7 @@
 ## 📚 Standart
 
 - **Nama File Style** : Nama file harus menggunakan ***cammelCase***
-- **Nama File standart** : Nama file harus menggunakan prefix `fetch` dan suffix `.service.ts` ada beberapa jenis fetch service yang di gunakan, dengan format `fetch<jenis><namaEntity>.service.ts`, berikut adalah jenis jenis fetch service yang di gunakan :
+- **Nama File standart** : Nama file harus menggunakan prefix `fetch` dan suffix `.service.ts` dengan format `fetch<jenis><namaEntity>.service.ts`, berikut adalah jenis jenis fetch service yang di gunakan :
   - `table` : untuk melakukan request untuk data tabel, contoh :
       >`fetchTableDpartment.service.ts`\
       >`fetchTableUser.service.ts`
