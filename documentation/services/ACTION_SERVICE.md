@@ -2,7 +2,7 @@
 
 ![MVDP Logo](https://static.wixstatic.com/media/eb21c1_0189d0cb1beb4ff0b9597d59abdebfac~mv2.png/v1/fill/w_201,h_58,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Machine%20Vision.png)
 
-**Action Servuce** Action service adalah custom hook yang di gunakan untuk melakuan aksi ***POS, PUT, PATCH, DELETE*** yang di kirim ke ***server*** menggunakan protokol ***Rest Api***
+**Action Service** Action service adalah custom hook yang di gunakan untuk melakukan aksi ***POS, PUT, PATCH, DELETE*** yang di kirim ke ***server*** menggunakan protokol ***Rest Api***
 
 ## 📚 Standart
 
@@ -49,6 +49,9 @@
     type IRequestBody = IRequestBodyActionSaveData
 
     export const ActionSaveData = <T>(body: IRequestBody): Promise<AxiosResponse<any<T>>> => {
+    /**
+     * client.api adalah wrapper untuk axios yang di gunakan untuk melakukan request ke server
+     */
       if (body.id) {
         return client.api.patch<IResponse<T>>(`/items/change_me/${body.id}`, body)
       }
