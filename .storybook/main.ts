@@ -5,13 +5,14 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {}
   },
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)', '../documentation/**/*.mdx'],
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
+    '@storybook/addon-docs'
   ],
   docs: {},
   staticDirs: ['../public'],

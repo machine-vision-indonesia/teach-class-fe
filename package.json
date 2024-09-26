@@ -50,6 +50,7 @@
     "@popperjs/core": "2.11.8",
     "@react-hook/resize-observer": "2.0.2",
     "@reduxjs/toolkit": "2.2.7",
+    "@storybook/addon-mdx-gfm": "^8.3.3",
     "@syncfusion/ej2-base": "^22.2.5",
     "@syncfusion/ej2-data": "^22.2.5",
     "@syncfusion/ej2-react-diagrams": "^22.2.5",

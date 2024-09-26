@@ -1,16 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDirs": [
-      "src",
-      ".storybook"
-    ],
+    "rootDirs": ["src", ".storybook"],
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -24,27 +17,12 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "apexcharts": [
-        "./node_modules/apexcharts-clevision"
-      ],
-      "apexcharts/*": [
-        "./node_modules/apexcharts-clevision/*"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ]
+      "@/*": ["./src/*"],
+      "apexcharts": ["./node_modules/apexcharts-clevision"],
+      "apexcharts/*": ["./node_modules/apexcharts-clevision/*"],
+      "react": ["./node_modules/@types/react"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".storybook/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".storybook/*.tsx", "documentation/documentation.mdx"],
+  "exclude": ["node_modules"]
 }

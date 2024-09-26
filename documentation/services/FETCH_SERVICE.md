@@ -52,7 +52,7 @@
 
 ## 💻 Contoh Fetch Service
 
-- **Contoh Code type Table***
+- **Contoh Code type Table**
   
   di bawah ini adalah contoh action service yang di gunakan untuk melakukan aksi ***GET*** dengan type ***Table*** menggunakan ***Rest Api***
 
@@ -146,7 +146,6 @@
   ```tsx
   import { TableAsyncV2 } from 'src/directory/of/component/TableAsyncV2'
   import { FetchTableIssueCategory } from 'src/directory/of/service/ActionButton'
-
 
   export const Component = () => {
     /**

@@ -8,6 +8,7 @@
 
 - **Nama File Style** : Nama file harus menggunakan ***cammelCase***
 - **Nama File standart** : Nama file harus menggunakan Prefix `action` contoh :
+  
   > `actionSaveData.service.ts` \
   > `actionDeleteData.service.ts`
 - **Nama Function Style** : Nama function harus menggunakan ***cammelCase*** sesuai dengan nama file yang di gunakan contoh :
@@ -20,8 +21,8 @@
 
   ```ts
   export interface IRequestBodyActionSubmit extends ICommonDto {
-    id: string
-    name: string
+    id: string,
+    name: string,
     code: string
   }
   ```
@@ -41,8 +42,8 @@
      * Ini adalah interface untuk payload di sesuaikan dengan table nya
      */
     export interface IRequestBodyActionSaveData extends ICommonDto {
-      id: string
-      name: string
+      id: string,
+      name: string,
       code: string
     }
 
@@ -61,16 +62,16 @@
   ```
 
   Contoh action service di dalam component dapat di lihat seperti code di bawah ini
+
   > [!IMPORTANT]
   > Menggunakan action service harus di kombinasikan dengan component 
-   
+
   > [!TIP]
   > untuk lebih jelasnya penggunaan ButtonAction, bisa di lihat di [**storybook**](https://storybook-dev.mvtool.machinevision.global/)
   
   ```tsx
   import { ActionButton } from 'src/components/atoms/ActionButton'
   import { ActionSaveData } from 'src/directory/of/service/ActionButton'
-
 
   export const Component = () => {
     return (
