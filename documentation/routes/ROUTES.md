@@ -4,7 +4,7 @@
 
 ## 🏛 ️Gambaran Umum
 
-Komponen `routes.tsx` bertanggung jawab untuk mengatur rute utama dari modul solutions menggunakan `createBrowserRouter` dari `react-router-dom` dan impor dinamis melalui `React.lazy`. Pengaturan ini memastikan bahwa berbagai modul seperti `dms, example` terdaftar di bawah main router di dalam folder `modules`,
+Komponen `routes.tsx` bertanggung jawab untuk mengatur rute utama dari modul solutions menggunakan `createBrowserRouter` dari [**`react-router-dom`**](https://reactrouter.com/en/main) dan impor dinamis melalui `React.lazy`. Pengaturan ini memastikan bahwa berbagai modul seperti `dms, example` terdaftar di bawah main router di dalam folder `modules`,
 
 ## Konsep Utama
 
@@ -22,6 +22,7 @@ Contoh Struktur Folder:
 
 ```go
 modules/
+├── routes.tsx // Rute utama untuk semua modul
 ├── dms<solution-group-name>/
 │   ├── clusters/
 │   ├── common/
@@ -34,6 +35,13 @@ modules/
     ├── routes.tsx // Router khusus untuk solution group ini
     └── index.tsx
 ```
+
+> ### check code [**disini**](https://github.com/machine-vision-indonesia/teach-class-fe/tree/main/src/modules) untuk lebih jelasnya
+
+
+> [!IMPORTANT]
+> wajib paham react-router-dom!!
+> ### jangan lupa pelajari [react-router-dom](https://reactrouter.com/en/main)
 
 Setiap file routes.tsx bertanggung jawab untuk mengekspor rute-rute khusus modul yang digunakan dalam konfigurasi rute utama.
 
